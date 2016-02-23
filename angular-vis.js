@@ -19,7 +19,8 @@ angular.module('ngVis', [])
             scope: {
                 data: '=',
                 options: '=',
-                events: '='
+                events: '=',
+                container: '='
             },
             link: function (scope, element, attr) {
                 var timelineEvents = [
@@ -50,7 +51,8 @@ angular.module('ngVis', [])
 
                     // Create the timeline object
                     timeline = new vis.Timeline(element[0], scope.data.items, scope.data.groups, scope.options);
-
+                    scope.container = timeline;
+                    
                     // Attach an event handler if defined
                     angular.forEach(scope.events, function (callback, event) {
                         if (timelineEvents.indexOf(String(event)) >= 0) {
